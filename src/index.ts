@@ -30,6 +30,10 @@ export default {
             const url = new URL(request.url);
             const params = await util.parseQueryParams(url);
 
+            if (url.pathname === '/favicon.ico') {
+                return new Response();
+            }
+
             const eventData = await util.filterEventData(JSON.parse(await env.kv.get("event_data")), params)
 
             if (url.pathname == '/rss' || url.pathname == '/feed') {
@@ -86,6 +90,38 @@ export default {
                 res.headers.set('Content-Encoding', 'gzip');
                 res.headers.set("Etag", util.cyrb53(bodyText));
                 return res;
+            }
+
+            if ("within_hours" in params) {
+                const withinHours = parseInt(params.within_hours);
+                for (const [_, value] of Object.entries(eventData)) {
+                    const upcomingEvents = value.eventSearch.edges.filter(edge => {
+                        const eventDateTimeStr = edge.node.dateTime;
+                        const eventDateTime = new Date(eventDateTimeStr);
+                        const now = new Date();
+                        const timeDifference = eventDateTime - now;
+                        const hoursInMs = withinHours * 60 * 60 * 1000;
+                        return timeDifference > 0 && timeDifference < hoursInMs;
+                    });
+                    value.eventSearch.edges = upcomingEvents;
+                    value.eventSearch.count = upcomingEvents.length;
+                }
+            }
+
+            if ("within_days" in params) {
+                const withinDays = parseInt(params.within_days);
+                for (const [_, value] of Object.entries(eventData)) {
+                    const upcomingEvents = value.eventSearch.edges.filter(edge => {
+                        const eventDateTimeStr = edge.node.dateTime;
+                        const eventDateTime = new Date(eventDateTimeStr);
+                        const now = new Date();
+                        const timeDifference = eventDateTime - now;
+                        const daysInMs = withinDays * 24 * 60 * 60 * 1000;
+                        return timeDifference > 0 && timeDifference < daysInMs;
+                    });
+                    value.eventSearch.edges = upcomingEvents;
+                    value.eventSearch.count = upcomingEvents.length;
+                }
             }
 
             res = new Response(JSON.stringify(eventData), {
