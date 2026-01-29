@@ -19,7 +19,7 @@
     "zod-to-json-schema": "^3.25.1"
   },
   "devDependencies": {
-    "@cloudflare/workers-types": "^4.20250924.0",
+    "@cloudflare/workers-types": "^4.20260129.0",
     "@types/chai": "^5.2.3",
     "@types/mocha": "^10.0.10",
     "@types/node": "^25.0.10",
