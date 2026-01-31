@@ -45,8 +45,4 @@ tampa_events_api/py.typed
 tampa_events_api/rest.py
 test-requirements.txt
 test/__init__.py
-test/test_groups_api.py
-test/test_v20260125_groups_get200_response_inner.py
-test/test_v20260125_groups_get200_response_inner_social_links.py
-test/test_v20260125_groups_slug_get404_response.py
 tox.ini

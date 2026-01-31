@@ -27,7 +27,6 @@ git_push.sh
 go.mod
 go.sum
 response.go
-test/api_groups_test.go
 utils.go
 v_model__2026_01_25_events_get_200_response_inner.go
 v_model__2026_01_25_groups__slug__get_404_response.go
