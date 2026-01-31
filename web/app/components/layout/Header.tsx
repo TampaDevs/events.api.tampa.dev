@@ -19,6 +19,8 @@ const navLinks = [
   { to: "/calendar", label: "Events" },
   { to: "/groups", label: "Groups" },
   { to: "/map", label: "Map" },
+  { to: "/leaderboard", label: "Leaderboard" },
+  { to: "/members", label: "Members" },
 ];
 
 function LogoutButton({
@@ -132,6 +134,16 @@ function UserMenu({ user }: { user: User }) {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
               </svg>
               Favorites
+            </Link>
+            <Link
+              to="/profile?tab=achievements"
+              onClick={closeMenu}
+              className="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
+            >
+              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+              </svg>
+              Achievements
             </Link>
             {(user.role === "admin" || user.role === "superadmin") && (
               <Link
@@ -356,6 +368,13 @@ export function Header({ user }: HeaderProps) {
                     className="px-3 py-2 rounded-lg text-sm font-medium text-gray-600 dark:text-gray-400"
                   >
                     Profile
+                  </Link>
+                  <Link
+                    to="/profile?tab=achievements"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="px-3 py-2 rounded-lg text-sm font-medium text-gray-600 dark:text-gray-400"
+                  >
+                    Achievements
                   </Link>
                   {(user.role === "admin" || user.role === "superadmin") && (
                     <Link
