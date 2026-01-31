@@ -39,9 +39,5 @@ lib/tampa_events_api/models/v20260125_schemas_get200_response.rb
 lib/tampa_events_api/models/v20260125_schemas_get200_response_schemas_inner.rb
 lib/tampa_events_api/models/v20260125_schemas_name_get404_response.rb
 lib/tampa_events_api/version.rb
-spec/api/groups_api_spec.rb
-spec/models/v20260125_groups_get200_response_inner_social_links_spec.rb
-spec/models/v20260125_groups_get200_response_inner_spec.rb
-spec/models/v20260125_groups_slug_get404_response_spec.rb
 spec/spec_helper.rb
 tampa_events_api.gemspec
